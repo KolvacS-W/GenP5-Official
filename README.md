@@ -65,7 +65,7 @@ The library will automatically render simple UIs for programmers to keep track o
 
 <img width="700" alt="Screen Shot 2024-06-19 at 6 18 23 PM" src="https://github.com/KolvacS-W/GenP5-Official/assets/55591358/0f223dfb-68be-4a66-a185-26da0ddc4b13">
 
-## Tutorial
+### Tutorial
 
 First open `backend_server` and install necesseary node.js dependencies.
 
@@ -80,7 +80,7 @@ key loaded
 WebSocket Server: Running on port xxxx
 ```
 
-Run the P5.js projects from `frontend_examples` or [open on p5 web editor](https://editor.p5js.org/wujiaq/sketches/mjmiecV_x).
+Run the P5.js projects from `frontend_examples/Usage1` or [open on p5 web editor](https://editor.p5js.org/wujiaq/sketches/mjmiecV_x).
 create your own art content with GenP5 in `sketch.js`.
 
 Recommended project structure:
@@ -130,7 +130,90 @@ sequentially, to create **final frame**s composing a final animation in a new **
 
 ![genp5abstract (1)](https://github.com/KolvacS-W/GenP5-Official/assets/55591358/d2850aa0-3e44-458f-a90d-e54e626b03e1)
 
-### Citation
+## Usage2: Conditioning Canvas Contents by predefined patterns
+### Overview
+The second part of GenP5 is the functionalities to condition the art creation with
+predetermined patterns (e.g., color, shape). These predetermined patterns are provided by external images (existing images or generated images from DM).
+
+We provide functions to allow user use input colorful images as color sources and black-white images as contour sources to condition p5 contents:
+
+Example:
+```javascript
+let particles = [];
+maincanvassize = 400
+let sampledColors = []
+
+function setup() {
+  genP5 = new GenP5(maincanvassize, '#FFFCFD');
+
+// get contour and color from customized images 
+genP5.get_NSampledColors('./colorimage.png', 0, 16).then((colors) => {
+sampledColors = colors; // Store the sampled colors
+
+genP5.load_ContourMap('./contourimage.png', setParticles);
+}).catch((error) => {
+  console.error("Failed to load or sample colors:", error);
+  });
+}
+// draw some art with particles
+function draw() {
+    frameRate(20);
+    clear()
+    for (let p of particles) {
+      p.move();
+      p.update();
+      p.display();
+    }    
+
+}
+// initiate particles on contour
+function setParticles() {
+  particles = [];
+  let sampledPoints = genP5.sample_ContourPoints(68000);
+  for (let point of sampledPoints) {
+    particles.push(new Particle(point.x, point.y));
+  }
+}
+
+
+class Particle {
+//code to define a particle
+}
+```
+
+<img width="800" alt="Screen Shot 2024-06-20 at 12 20 27 AM" src="https://github.com/KolvacS-W/GenP5-Official/assets/55591358/1099c184-6bde-4188-87dc-13271ce87efa">
+
+### Tutorial 
+
+Directly run the example p5 projects from `frontend_examples/Usage2` or [open on p5 web editor](https://editor.p5js.org/wujiaq/sketches/tYZ_1H5hL).
+create your own art content with GenP5 in `sketch.js` and adding customized images as color/contour (black-white images) source in project folder.
+
+Recommended project structure:
+
+(p5.js project folder)
+
+-- genp5lib.js (library source code),
+
+-- index.html,
+
+-- sketch.js
+
+-- color or contour images
+
+### Examples
+
+#### Example 1: particle portrait
+[open on p5 web editor](https://editor.p5js.org/wujiaq/sketches/tYZ_1H5hL)
+
+<img width="800" alt="Screen Shot 2024-06-20 at 12 28 36 AM" src="https://github.com/KolvacS-W/GenP5-Official/assets/55591358/d60c3315-237b-4f9d-b860-eb3917eab4ae">
+
+
+#### Example 2: forming heart
+[open on p5 web editor](https://editor.p5js.org/wujiaq/sketches/hTGhOuvRN)
+
+<img width="800" alt="Screen Shot 2024-06-20 at 12 26 49 AM" src="https://github.com/KolvacS-W/GenP5-Official/assets/55591358/45f96392-490c-45a8-880c-69b578661f62">
+
+## Citation
 
 If you find it inspiring, please consider cite our source:
 
