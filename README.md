@@ -70,7 +70,9 @@ WebSocket Server: Running on port xxxx
 ```
 
 Run the P5.js projects from `frontend_examples` or [open on p5 web editor](https://editor.p5js.org/wujiaq/sketches/mjmiecV_x).
-create your own art content with GenP5 in `sketch.js`. Recommended project structure:
+create your own art content with GenP5 in `sketch.js`. 
+
+Recommended project structure:
 
 (p5.js project folder)
 
@@ -115,6 +117,19 @@ sequentially, to create **final frame**s composing a final animation in a new **
 
 ![genp5abstract (1)](https://github.com/KolvacS-W/GenP5-Official/assets/55591358/d2850aa0-3e44-458f-a90d-e54e626b03e1)
 
+### Citation
+
+If you find it inspiring, please consider cite our source:
+```
+@misc{wu2024exploring,
+      title={Exploring Bridges Between Creative Coding and Visual Generative AI}, 
+      author={Jiaqi Wu},
+      year={2024},
+      eprint={2406.05508},
+      archivePrefix={arXiv},
+      primaryClass={id='cs.HC' full_name='Human-Computer Interaction' is_active=True alt_name=None in_archive='cs' is_general=False description='Covers human factors, user interfaces, and collaborative computing. Roughly includes material in ACM Subject Classes H.1.2 and all of H.5, except for H.5.1, which is more likely to have Multimedia as the primary subject area.'}
+}
+```
 
 
 
